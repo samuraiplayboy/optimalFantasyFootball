@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+        <title>Optimal Fantasy Lineups</title>
+
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+    </head>
+
+    <body>
+
+    <!-- Navbar -->
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Optimal FF</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    <!-- Lineups -->
+        <section class="sectionLineups">
+            <!-- <div class="sectionTitle">
+                <h1>Get the Best Daily Fantasy Lineups</h1>
+            </div> -->
+            <div class="pure-g" id="splash-buttons">
+                <div class="pure-u-1">
+                    <center><button class="waves-effect waves-light btn-large" onClick="showDkLineup()">Draft Kings</button></center>
+                </div>
+                <div class="pure-u-1">
+                    <center>
+                        <button class="waves-effect waves-light btn-large" onClick="showFdLineup()">Fan Duel</button>
+                    </center>
+                </div>
+            </div>
+            <div class="pure-g .pure-g-valign-fix" id="lineup">
+                <div class="pure-u-1-2">
+                    <center>
+                        <table class="pure-table striped">
+                            <thead>
+                                <tr>
+                                    <th data-field="pos">Position</th>
+                                    <th data-field="name">Name</th>
+                                    <th data-field="salary">Salary</th>
+                                    <th data-field="points">Projected Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>QB</td>
+                                    <td>Philip Rivers</td>
+                                    <td>6600</td>
+                                    <td>23.50</td>
+                                </tr>
+                                <tr>
+                                    <td>RB</td>
+                                    <td>Devonta Freeman</td>
+                                    <td>8000</td>
+                                    <td>22.99</td>
+                                </tr>
+                                <tr>
+                                    <td>RB</td>
+                                    <td>Justin Forsett</td>
+                                    <td>6100</td>
+                                    <td>20.45</td>
+                                </tr>
+                                <tr>
+                                    <td>WR</td>
+                                    <td>Antonio Brown</td>
+                                    <td>7800</td>
+                                    <td>21.68</td>
+                                </tr>
+                                <tr>
+                                    <td>WR</td>
+                                    <td>Michael Crabtree</td>
+                                    <td>4700</td>
+                                    <td>13.81</td>
+                                </tr>
+                                <tr>
+                                    <td>WR</td>
+                                    <td>Willie Snead</td>
+                                    <td>4500</td>
+                                    <td>12.10</td>
+                                </tr>
+                                <tr>
+                                    <td>TE</td>
+                                    <td>Ladarius Green</td>
+                                    <td>3000</td>
+                                    <td>11.26</td>
+                                </tr>
+                                <tr>
+                                    <td>FLEX</td>
+                                    <td>Todd Gurley</td>
+                                    <td>6300</td>
+                                    <td>19.05</td>
+                                </tr>
+                                <tr>
+                                    <td>DST</td>
+                                    <td>Jets</td>
+                                    <td>2900</td>
+                                    <td>14.43</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </center>
+                </div>
+                <div class="pure-u-1-2 lineup-buttons">
+                    <center>
+                        <button id="rerun-btn" class="waves-effect waves-light btn-large">Re-Optimize</button>
+                    </center>
+                    <center>
+                        <button id="restart-btn" class="waves-effect waves-light btn-large">Start Over</button>
+                    </center>
+                </div>
+            </div>
+        </section>
+
+    <!-- Footer -->
+        <!-- <footer class="page-footer"> 
+            <div class="container">&#169; 2015 William Graf</div>
+        </footer> -->
+
+    <!-- JavaScript Imports -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+    </body>
+</html>

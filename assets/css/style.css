@@ -1,0 +1,98 @@
+/*********************************************************************************/
+/* General																	     */
+/*********************************************************************************/
+
+	html {
+	    position: relative;
+	}
+
+	body {
+		min-height: 100%;
+		line-height: 1.7em;
+	    color: #7f8c8d;
+	    font-size: .9em;
+	    background-color: #2196F3;
+	}
+
+	.sectionTitle {
+		text-align: center;
+		padding-top: 1em;
+	}
+
+	.sectionTitle h1 {
+		font-weight: 300;
+		font-size: 350%;
+		color: #fff;
+	}
+
+
+/*********************************************************************************/
+/* Navbar																		 */
+/*********************************************************************************/
+
+
+	.nav-wrapper {
+		padding: 0 3em;
+	}
+
+
+/*********************************************************************************/
+/* Lineup																		 */
+/*********************************************************************************/
+
+	.sectionLineups {
+		height: 100%;
+	}
+
+	#splash-buttons {
+		padding-top: 10%;
+	}
+
+	.btn-large {
+		width: 75%;
+		height: 5em;
+		border: 3px solid #FFF;
+		font-size: 150%;
+		margin: 1em 0;
+		font-weight: 100;
+		background-color: #2196F3;
+	}
+
+	#lineup {
+		display: none;
+		padding: 0 10%;
+	}
+
+	.pure-table {
+		margin-top: 3em;
+		background-color: #FFFFFF;
+		color: #000000;
+	}
+
+	.lineup-buttons {
+		padding-top: 3em;
+	}
+
+	.lineup-buttons button {
+		margin: 1.5em 0;
+	}
+
+	#rerun-btn {
+		background-color: #f37e21;
+	}
+
+	#restart-btn {
+		background-color: #96f321;
+	}
+
+
+/*********************************************************************************/
+/* Footer																	     */
+/*********************************************************************************/
+
+	.page-footer {
+		text-align: right;
+		width: 100%;
+		color: #fff;
+		padding-bottom: 1.1em;
+	}
