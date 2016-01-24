@@ -48,83 +48,19 @@
                 </div>
             </div>
             <div class="pure-g .pure-g-valign-fix" id="lineup">
-                <div class="pure-u-1-2">
+                <div class="pure-u-1-2 pure-u-md-1-2 lineup-buttons">
                     <center>
-                        <table class="pure-table striped">
-                            <thead>
-                                <tr>
-                                    <th data-field="pos">Position</th>
-                                    <th data-field="name">Name</th>
-                                    <th data-field="salary">Salary</th>
-                                    <th data-field="points">Projected Points</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>QB</td>
-                                    <td>Philip Rivers</td>
-                                    <td>6600</td>
-                                    <td>23.50</td>
-                                </tr>
-                                <tr>
-                                    <td>RB</td>
-                                    <td>Devonta Freeman</td>
-                                    <td>8000</td>
-                                    <td>22.99</td>
-                                </tr>
-                                <tr>
-                                    <td>RB</td>
-                                    <td>Justin Forsett</td>
-                                    <td>6100</td>
-                                    <td>20.45</td>
-                                </tr>
-                                <tr>
-                                    <td>WR</td>
-                                    <td>Antonio Brown</td>
-                                    <td>7800</td>
-                                    <td>21.68</td>
-                                </tr>
-                                <tr>
-                                    <td>WR</td>
-                                    <td>Michael Crabtree</td>
-                                    <td>4700</td>
-                                    <td>13.81</td>
-                                </tr>
-                                <tr>
-                                    <td>WR</td>
-                                    <td>Willie Snead</td>
-                                    <td>4500</td>
-                                    <td>12.10</td>
-                                </tr>
-                                <tr>
-                                    <td>TE</td>
-                                    <td>Ladarius Green</td>
-                                    <td>3000</td>
-                                    <td>11.26</td>
-                                </tr>
-                                <tr>
-                                    <td>FLEX</td>
-                                    <td>Todd Gurley</td>
-                                    <td>6300</td>
-                                    <td>19.05</td>
-                                </tr>
-                                <tr>
-                                    <td>DST</td>
-                                    <td>Jets</td>
-                                    <td>2900</td>
-                                    <td>14.43</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <button id="rerun-btn" class="waves-effect waves-light btn" onClick="reoptimize()">ReOptimize</button>
                     </center>
                 </div>
-                <div class="pure-u-1-2 lineup-buttons">
+                <div class="pure-u-1-2 pure-u-md-1-2 lineup-buttons">
                     <center>
-                        <button id="rerun-btn" class="waves-effect waves-light btn-large">Re-Optimize</button>
+                        <button id="restart-btn" class="waves-effect waves-light btn" onClick="reset()">ReStart</button>
                     </center>
-                    <center>
-                        <button id="restart-btn" class="waves-effect waves-light btn-large">Start Over</button>
-                    </center>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-2">
+                    <div id="lineupTable">
+                    </div>
                 </div>
             </div>
         </section>

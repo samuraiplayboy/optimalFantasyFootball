@@ -48,8 +48,12 @@
 		padding-top: 10%;
 	}
 
+	.btn {
+		width: 95%;
+	}
+
 	.btn-large {
-		width: 75%;
+		width: 80%;
 		height: 5em;
 		border: 3px solid #FFF;
 		font-size: 150%;
@@ -61,6 +65,15 @@
 	#lineup {
 		display: none;
 		padding: 0 10%;
+		margin-bottom: 5em;
+	}
+
+	#lineupTable {
+		background-color: white;
+		color: #000;
+		text-align: center;
+		margin-top: 5em 0;
+		min-width: 10em;
 	}
 
 	.pure-table {
@@ -79,10 +92,12 @@
 
 	#rerun-btn {
 		background-color: #f37e21;
+		float: left;
 	}
 
 	#restart-btn {
 		background-color: #96f321;
+		float: right;
 	}
 
 

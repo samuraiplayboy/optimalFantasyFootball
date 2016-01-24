@@ -5,12 +5,10 @@ from random import randint
 
 
 def getFpRankingsData():
-    posUrls = ["qb", "ppr-rb", "ppr-wr", "ppr-te" "k", "dst"]
-    urls = [
-      "http://www.fantasypros.com/nfl/rankings/%s.php" % pos for pos in posUrls
-    ]
     players = []
-    for url in urls:
+    posUrls = ["qb", "ppr-rb", "ppr-wr", "ppr-te" "k", "dst"]
+    for posUrl in posUrls:
+        url = "http://www.fantasypros.com/nfl/rankings/%s.php" % posUrl
         sleep(randint(2, 5))
         try:
             response = requests.get(url, timeout = 10)
@@ -23,6 +21,7 @@ def getFpRankingsData():
                 print "Couldn't scrape:", url
 
         try:
+            position = getPosFromPosUrl(posUrl)
             ecr      = getFpPlayerEcr(tree)
             names    = getFpPlayerName(tree)
             meanrank = getFpPlayerAvgRank(tree)
@@ -38,12 +37,21 @@ def getFpRankingsData():
             player['Rank']      = ecr[i]
             player['MeanRank']  = meanrank[i]
             player['RankStdev'] = stdev[i]
+            player['Position']  = position
             # player['Opponent']  = opps[i]
 
             players.append(player)
             print "Scraped FantasyPros Rankings for:", player["Name"]
 
     return players
+
+def getPosFromPosUrl(posUrl):
+    if "-" in posUrl:
+        pos = (posUrl.split("-")[-1]).upper()
+    else:
+        pos = posUrl.upper()
+
+    return pos
 
 
 def getFpPlayerEcr(tree):

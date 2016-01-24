@@ -61,7 +61,7 @@ def getTopNLineups(n = 1):
                     topN = optimizeTop(topFlexLineup(players, k), topN, m)
         return topN
 
-    players = readDataFile("data/bestDkPlayers.json")
+    players = readDataFile("../data/bestDkPlayers.json")
     finalLineup = topFlexLineup(players)
     topN = [finalLineup]
     topN = iterPlayers(finalLineup, topN, n)
@@ -202,5 +202,5 @@ def unicodeToString(text):
     except:
         return text
 
-# print writeLineup(getLineup(readDataFile("data/bestDkPlayers.json"), "RB", 5))
+# print writeLineup(getLineup(readDataFile("../data/bestDkPlayers.json"), "RB", 5))
 getTopNLineups(3)

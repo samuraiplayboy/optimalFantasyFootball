@@ -70,13 +70,18 @@ def main():
             player["FdPointsPerDollar"] = player["AvgFdPoints"] / player["fdSalary"]
         except:
             player["DkPointsPerDollar"], player["FdPointsPerDollar"] = 0, 0
-        positions[player["Position"]]["AvgDkPoints"].append(player["DkPointsPerDollar"])
-        positions[player["Position"]]["AvgFdPoints"].append(player["FdPointsPerDollar"])
+
+        try:
+            positions[player["Position"]]["AvgDkPoints"].append(player["DkPointsPerDollar"])
+            positions[player["Position"]]["AvgFdPoints"].append(player["FdPointsPerDollar"])
+        except:
+            print "Error getting position average points."
+            print "Position", player["Position"]
 
     for player in refinedData:
         calcExpectation(player, positions)
 
-    writeData(refinedData, "data/fantasyData.json")
+    writeData(refinedData, "../data/fantasyData.json")
     writeFinalFiles(refinedData)
 
     return refinedData
@@ -86,64 +91,40 @@ def main():
 ###                            Data ETL Functions                           ###
 ###############################################################################
 
-# Pipeline
-def runPipeline():
-    rawDataFile = "data/rawData.json"
-    allData = []
-    if os.path.isfile(rawDataFile):
-        fileAge = time() - os.path.getctime(rawDataFile)
-    else:
-        fileAge = 4000
 
+def runPipeline():
+
+    def scrapeData():
+        roto = getRotoProjections()
+        espn = getEspnProjectionsData()
+        ranks = getFpRankingsData()
+        fp = getFpProjectionsData()
+
+        data = [ranks, roto, espn, fp]
+
+        return data
+
+    def joinData(listOfPlayerLists):
+        d = defaultdict(dict)
+        for dataset in listOfPlayerLists:
+            for player in dataset:
+                player["Name"] = player["Name"].lower()
+                d[player["Name"]].update(player)
+
+        return d.values()
+
+    rawDataFile = "../data/rawData.json"
+    allData = []
+    found = os.path.isfile(rawDataFile)
+    fileAge = time() - os.path.getctime(rawDataFile) if found else 4000
     # if its been scraped in the last hour, just read the file.
-    if fileAge < 60 * 60:
-        with open(rawDataFile) as f:
+    if fileAge < 3600:
+        with open(rawDataFile, 'r') as f:
             allData = json.load(f)
     else:
-        allData = joinData(scrapeData())
-        writeData(allData, rawDataFile)
+        writeData(joinData(scrapeData()), rawDataFile)
 
     return allData
-
-# Extract
-def scrapeData():
-    roto = getRotoProjections()
-    espn = getEspnProjectionsData()
-    ranks = getFpRankingsData()
-    fp = getFpProjectionsData()
-
-    data = [ranks, roto, espn, fp]
-
-    return data
-
-# Transform
-def joinData(listOfPlayerLists):
-    d = defaultdict(dict)
-    for dataset in listOfPlayerLists:
-        for player in dataset:
-            player["Name"] = player["Name"].lower()
-            d[player["Name"]].update(player)
-
-    return d.values()
-
-
-def reducePlayer(player, site = "Dk"):
-    site = site.lower()
-    sPlayer = {"Name": player["Name"],
-               "Position": player["Position"]}
-    if site == "dk":
-        sPlayer["Points"] = player["AvgDkPoints"]
-        sPlayer["Salary"] = player["dkSalary"]
-        sPlayer["ExpPoints"] = player["expDkPoints"]
-    elif site == "fd":
-        sPlayer["Points"] = player["AvgFdPoints"]
-        sPlayer["Salary"] = player["fdSalary"]
-        sPlayer["ExpPoints"] = player["expFdPoints"]
-    else:
-        sPlayer = sPlayer(player)
-    sPlayer["PerDiff"] = abs(sPlayer["Points"] - sPlayer["ExpPoints"]) / sPlayer["Points"]
-
-    return sPlayer
 
 
 def calcExpectation(player, positions):
@@ -154,7 +135,7 @@ def calcExpectation(player, positions):
     player["expDkPoints"] = player["dkSalary"] * (avgDkPosPpd)
     player["expFdPoints"] = player["fdSalary"] * (avgFdPosPpd)
 
-# Load
+
 def writeData(data, fileName):
     with open(fileName, "w") as fantasyFile:
         json.dump(data, fantasyFile, indent = 4)
@@ -163,15 +144,35 @@ def writeData(data, fileName):
 
 
 def writeFinalFiles(data):
+
+    def reducePlayer(player, site):
+        site = site.lower()
+        sPlayer = {"Name": player["Name"],
+                   "Position": player["Position"]}
+        if site == "dk":
+            sPlayer["Points"] = player["AvgDkPoints"]
+            sPlayer["Salary"] = player["dkSalary"]
+            sPlayer["ExpPoints"] = player["expDkPoints"]
+        elif site == "fd":
+            sPlayer["Points"] = player["AvgFdPoints"]
+            sPlayer["Salary"] = player["fdSalary"]
+            sPlayer["ExpPoints"] = player["expFdPoints"]
+        else:
+            sPlayer = sPlayer(player)
+        sPlayer["PerDiff"] = abs(sPlayer["Points"] - sPlayer["ExpPoints"]) / sPlayer["Points"]
+
+        return sPlayer
+
     sites = ["Fd", "Dk"]
+    positions = ["QB", "RB", "WR", "TE", "K", "DST"]
     for site in sites:
         avgKey = "Avg" + site + "Points"
         expKey = "exp" + site + "Points"
-        fileName = "data/best" + site + "Players.json"
+        fileName = "../data/best" + site + "Players.json"
         bestplayers = []
         for d in data:
             salary = site.lower() + "Salary"
-            if d[expKey] <= d[avgKey] and d[salary] > 0:
+            if d[expKey] <= d[avgKey] and d[salary] > 0 and d["Position"] in positions:
                 bestplayers.append(reducePlayer(d, site))
         writeData(bestplayers, fileName)
 

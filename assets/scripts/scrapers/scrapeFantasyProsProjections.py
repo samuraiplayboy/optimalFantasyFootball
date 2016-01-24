@@ -61,6 +61,7 @@ def getQbs(tree):
     for i in xrange(len(names)):
         qb = {"fpProjections":{}}
         qb["Name"] = names[i]
+        qb["Position"] = "QB"
         qb["fpProjections"]["PassAtts"]  = float(passAtts[i])
         qb["fpProjections"]["PassComp"]  = float(passComp[i])
         qb["fpProjections"]["PassYards"] = float(passYards[i])
@@ -89,6 +90,7 @@ def getRbs(tree):
     for i in xrange(len(names)):
         rb = {"fpProjections": {}}
         rb["Name"] = names[i]
+        rb["Position"] = "RB"
         rb["fpProjections"]["RushAtts"]  = float(rushAtts[i])
         rb["fpProjections"]["RushYards"] = float(rushYards[i])
         rb["fpProjections"]["RushTds"]   = float(rushTds[i])
@@ -114,6 +116,7 @@ def getWrs(tree):
     for i in xrange(len(names)):
         wr = {"fpProjections": {}}
         wr["Name"] = names[i]
+        wr["Position"] = "WR"
         wr["fpProjections"]["RushAtts"]  = float(rushAtts[i])
         wr["fpProjections"]["RushYards"] = float(rushYards[i])
         wr["fpProjections"]["RushTds"]   = float(rushTds[i])
@@ -137,6 +140,7 @@ def getTes(tree):
     for i in xrange(len(names)):
         te = {"fpProjections": {}}
         te["Name"] = names[i]
+        te["Position"] = "TE"
         te["fpProjections"]["Recs"]     = float(recs[i])
         te["fpProjections"]["RecYards"] = float(recYards[i])
         te["fpProjections"]["RecTds"]   = float(recTds[i])
@@ -156,6 +160,7 @@ def getKs(tree):
     for i in xrange(len(names)):
         k = {"fpProjections": {}}
         k["Name"] = names[i]
+        k["Position"] = "K"
         k["fpProjections"]["FG"]  = float(fg[i])
         k["fpProjections"]["FGA"] = float(fga[i])
         k["fpProjections"]["XPT"] = float(xpt[i])
